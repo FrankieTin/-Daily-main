@@ -1,0 +1,65 @@
+{
+  "name": "Sci-Daily",
+  "short_name": "Sci-Daily",
+  "description": "研究与生活记录应用",
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/",
+  "background_color": "#FAF8F6",
+  "theme_color": "#4A665A",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "lifestyle"],
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/pwa-maskable-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/screenshot-1.png",
+      "sizes": "540x720",
+      "type": "image/png",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "/screenshot-2.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daily Record",
+      "short_name": "Record",
+      "description": "Create a new daily record",
+      "url": "/?mode=record",
+      "icons": [{
+        "src": "/pwa-192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }]
+    }
+  ]
+}
