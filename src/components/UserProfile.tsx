@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { User, Settings, LogOut, ChevronRight, Shield, Edit3, Palette, Camera, LogIn } from 'lucide-react';
+import React, { useState, useRef } from 'react';
+import { User, Settings, LogOut, ChevronRight, Shield, Edit3, Palette, Camera, LogIn, Download, Upload } from 'lucide-react';
 import { useAppContext } from '../store';
 import SettingsPanel from './Settings';
 import { useAuth } from '../lib/AuthContext';
@@ -16,6 +16,58 @@ export default function UserProfile({ startWithSettings = false, onBackToMain }:
   const { user, logout, updateProfileData } = useAuth();
   const { state, updateTheme } = useAppContext();
   const fileInputRef = React.useRef<HTMLInputElement>(null);
+  const importFileRef = useRef<HTMLInputElement>(null);
+
+  const handleExportData = () => {
+    if (!user) {
+      alert('请先登录后再导出数据');
+      return;
+    }
+    const usersData = localStorage.getItem('local_users') || '[]';
+    const appData = localStorage.getItem(`app_data_${user.uid}`);
+    const exportObj = {
+      version: 1,
+      exportTime: new Date().toISOString(),
+      users: JSON.parse(usersData),
+      appData: appData ? JSON.parse(appData) : null,
+      currentUid: user.uid
+    };
+    const blob = new Blob([JSON.stringify(exportObj, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `scidaily-backup-${user.uid.substring(0, 8)}-${new Date().toISOString().split('T')[0]}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const handleImportData = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      try {
+        const data = JSON.parse(event.target?.result as string);
+        if (!data.version || !data.users || !data.appData) {
+          alert('无效的备份文件格式');
+          return;
+        }
+        if (data.users && Array.isArray(data.users)) {
+          localStorage.setItem('local_users', JSON.stringify(data.users));
+        }
+        if (data.appData && data.currentUid) {
+          localStorage.setItem(`app_data_${data.currentUid}`, JSON.stringify(data.appData));
+          localStorage.setItem('current_uid', data.currentUid);
+        }
+        alert('数据导入成功，请刷新页面');
+        window.location.reload();
+      } catch (err) {
+        console.error(err);
+        alert('导入失败，请确保文件格式正确');
+      }
+    };
+    reader.readAsText(file);
+  };
 
   const handleUpdateAvatarClick = () => {
     if (fileInputRef.current) {
@@ -168,6 +220,7 @@ export default function UserProfile({ startWithSettings = false, onBackToMain }:
         <div className="bg-card rounded-card shadow-theme border border-line overflow-hidden p-8 flex flex-col items-center">
           <div className="relative group cursor-pointer mb-8" onClick={handleUpdateAvatarClick}>
             <input type="file" ref={fileInputRef} onChange={handleAvatarUpload} accept="image/*" className="hidden" />
+        <input type="file" ref={importFileRef} onChange={handleImportData} accept=".json" className="hidden" />
             <div className="w-28 h-28 rounded-full bg-sage/20 border-4 border-sage flex items-center justify-center overflow-hidden">
               {user?.photoURL ? (
                 <img src={user.photoURL} alt="Profile" className="w-full h-full object-cover" />
@@ -263,6 +316,26 @@ export default function UserProfile({ startWithSettings = false, onBackToMain }:
                 <Settings size={18} />
               </div>
               组件显示控制
+            </div>
+            <ChevronRight size={18} className="text-text-muted" />
+          </button>
+
+          <button className="flex items-center justify-between p-5 border-b border-line hover:bg-base transition-colors group" onClick={handleExportData}>
+            <div className="flex items-center gap-3 text-[16px] text-text-main font-bold">
+              <div className="p-2 rounded-[10px] bg-green-500/10 text-green-600 group-hover:scale-110 transition-transform">
+                <Download size={18} />
+              </div>
+              导出数据备份
+            </div>
+            <ChevronRight size={18} className="text-text-muted" />
+          </button>
+
+          <button className="flex items-center justify-between p-5 border-b border-line hover:bg-base transition-colors group" onClick={() => importFileRef.current?.click()}>
+            <div className="flex items-center gap-3 text-[16px] text-text-main font-bold">
+              <div className="p-2 rounded-[10px] bg-orange-500/10 text-orange-600 group-hover:scale-110 transition-transform">
+                <Upload size={18} />
+              </div>
+              导入数据恢复
             </div>
             <ChevronRight size={18} className="text-text-muted" />
           </button>

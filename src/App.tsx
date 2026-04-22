@@ -35,8 +35,8 @@ function AppContent() {
   return (
     <div className="flex flex-col h-screen overflow-hidden bg-base font-sans text-text-main selection:bg-sage/20 relative">
       
-      {/* 顶部应用栏 - 面向移动端设计 */}
-      <div className="md:hidden flex-none flex items-center justify-center px-4 py-3 bg-sage border-b border-sage shadow-md z-30 relative transition-colors duration-300">
+      {/* 顶部应用栏 - 面向移动端设计，使用 pt-safe 处理刘海屏 */}
+      <div className="md:hidden flex-none flex items-center justify-center px-4 py-3 pt-safe bg-sage border-b border-sage shadow-md z-30 relative transition-colors duration-300">
         {mainNav === 'research' && (
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
