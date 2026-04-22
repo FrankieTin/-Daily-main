@@ -72,7 +72,7 @@ function AppContent() {
             {/* Main Content Area */}
             <main ref={mainRef} className="flex-1 overflow-y-auto w-full pb-20 md:pb-0 relative">
               {/* Desktop Top Right User Entry */}
-              <div className="hidden md:block absolute top-6 right-10 z-20">
+              <div className="hidden md:block absolute top-3 right-10 z-20">
                 <button 
                   onClick={() => setMainNav('user')}
                   className="flex items-center gap-2 bg-card border border-line rounded-full pl-2 pr-4 py-1.5 shadow-sm hover:shadow-theme transition-all group"

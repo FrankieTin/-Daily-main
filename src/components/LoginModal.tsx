@@ -40,7 +40,7 @@ export default function LoginModal({ onClose }: { onClose: () => void }) {
                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
              </div>
              <h2 className="text-[24px] font-serif font-bold text-text-main">
-               {isRegister ? '加入科研Daily' : '登录记录家'}
+               {isRegister ? '加入科研Daily' : '登录'}
              </h2>
              <p className="text-[14px] text-text-muted mt-2">
                离线本地数据引擎保障您的隐私<br/>即刻开启或继续您的学术足迹
