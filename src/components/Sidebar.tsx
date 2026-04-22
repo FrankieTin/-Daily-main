@@ -118,14 +118,7 @@ export default function Sidebar({ currentTab, setCurrentTab, inMobile }: Sidebar
         </button>
       </div>
 
-      <div className="px-5 md:px-8 py-6 w-full mt-auto">
-        <div className="bg-transparent border border-dashed border-line p-5 rounded-[16px]">
-          <Quote size={16} className="text-text-muted mb-3" />
-          <p className="text-[13px] italic text-text-muted leading-relaxed font-serif">
-            “求知若渴，虚怀若谷。”<br/>(Stay hungry, stay foolish.)
-          </p>
-        </div>
-      </div>
+      
     </div>
   );
 }

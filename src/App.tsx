@@ -116,7 +116,7 @@ function AppContent() {
       </div>
 
       {/* 小程序专属底部导航栏 */}
-      <div className="md:hidden flex-none fixed bottom-0 left-0 right-0 h-[97px] bg-card/90 backdrop-blur-md border-t border-line flex justify-around px-2 z-40 pb-safe shadow-lg">
+      <div className="md:hidden flex-none fixed bottom-0 left-0 right-0 h-[94px] bg-card/90 backdrop-blur-md border-t border-line flex justify-around px-2 z-40 pb-safe shadow-lg">
          <button 
            onClick={() => setMainNav('research')}
            className={cn("flex-1 flex flex-col items-center justify-end pb-3 transition-colors", mainNav === 'research' ? 'text-sage font-bold' : 'text-text-muted hover:text-sage')}
