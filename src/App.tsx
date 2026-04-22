@@ -116,20 +116,20 @@ function AppContent() {
       </div>
 
       {/* 小程序专属底部导航栏 */}
-      <div className="md:hidden flex-none fixed bottom-0 left-0 right-0 h-[88px] bg-card/90 backdrop-blur-md border-t border-line flex justify-around px-2 z-40 pb-safe shadow-lg">
+      <div className="md:hidden flex-none fixed bottom-0 left-0 right-0 h-[97px] bg-card/90 backdrop-blur-md border-t border-line flex justify-around px-2 z-40 pb-safe shadow-lg">
          <button 
            onClick={() => setMainNav('research')}
            className={cn("flex-1 flex flex-col items-center justify-end pb-3 transition-colors", mainNav === 'research' ? 'text-sage font-bold' : 'text-text-muted hover:text-sage')}
          >
-           <Home size={22} className="mt-1" strokeWidth={mainNav === 'research' ? 2.5 : 2} />
-           <span className="text-[11px] uppercase tracking-wider">记录</span>
+           <Home size={24} className="mt-1" strokeWidth={mainNav === 'research' ? 2.5 : 2} />
+           <span className="text-[12px] uppercase tracking-wider">记录</span>
          </button>
          <button 
            onClick={() => setMainNav('user')}
            className={cn("flex-1 flex flex-col items-center justify-end pb-3 transition-colors", mainNav === 'user' ? 'text-sage font-bold' : 'text-text-muted hover:text-sage')}
          >
-           <User size={22} className="mt-1" strokeWidth={mainNav === 'user' ? 2.5 : 2} />
-           <span className="text-[11px] uppercase tracking-wider">用户</span>
+           <User size={24} className="mt-1" strokeWidth={mainNav === 'user' ? 2.5 : 2} />
+           <span className="text-[12px] uppercase tracking-wider">用户</span>
          </button>
       </div>
     </div>
